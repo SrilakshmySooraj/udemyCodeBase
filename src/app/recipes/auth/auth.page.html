@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Authentication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSumbit(f)">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+          <ion-item>
+              <ion-label position="floating">E-Mail</ion-label>
+                <ion-input type="email" ngModel name="email" required email></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" ngModel name="password" required minlength="4"></ion-input>
+              </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size-md="6" offset-md="3">
+            <ion-button type="button" fill="clear" expand="block">Switch to Login</ion-button>
+            <ion-button type="submit" color="primary" margin (click)="login()" expand="block">Login</ion-button>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</form>
+</ion-content>

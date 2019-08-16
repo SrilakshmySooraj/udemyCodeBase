@@ -1,0 +1,23 @@
+ion-content {
+    --background: radial-gradient(grey, black);
+    // background-image: radial-gradient;
+}
+
+ion-img {
+  margin-top: 12%;
+  height: 30vh !important;
+  width: auto !important;
+  align-items: center;
+}
+
+ion-icon {
+  font-size: 40px; //Preferred size here
+}
+
+.labels {
+  color:white;
+}
+   
+.icon-class {
+    color:white;
+}

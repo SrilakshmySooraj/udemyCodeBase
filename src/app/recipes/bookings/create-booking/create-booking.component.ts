@@ -1,0 +1,25 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { Places } from '../../places/places.model';
+import { ModalController } from '@ionic/angular';
+
+@Component({
+  selector: 'app-create-booking',
+  templateUrl: './create-booking.component.html',
+  styleUrls: ['./create-booking.component.scss'],
+})
+export class CreateBookingComponent implements OnInit {
+
+  @Input() selectedPlace : Places;
+
+  constructor(private modal:ModalController) { }
+
+  ngOnInit() {}
+
+  book() {
+    this.modal.dismiss({message : "This is a dummy message"}, "Confirm");
+  }
+
+  cancel() {
+    this.modal.dismiss(null, "Cancel");
+  }
+}

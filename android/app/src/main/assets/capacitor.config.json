@@ -1,0 +1,7 @@
+{
+  "appId": "com.udemy.course.ionic.angular",
+  "appName": "recipe",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
