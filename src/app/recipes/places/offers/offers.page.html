@@ -18,7 +18,7 @@
           <ion-item-sliding *ngFor="let place of loadedOffers" #slidingItem>
             <app-offer-items [place]="place"></app-offer-items>
             <ion-item-options side="end">
-              <ion-item-option color="secondary" (click) ="onEdit(place?.id,slidingItem)">
+              <ion-item-option color="secondary" (click) ="onEdit(place?.id,slidingItem)">{{place?.id}}
                 <ion-icon name="create"></ion-icon>
               </ion-item-option>
             </ion-item-options>

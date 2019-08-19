@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Places } from './places.model';
-import { identifierModuleUrl } from '@angular/compiler';
 import { Booking } from './booking.model';
 
 @Injectable({
