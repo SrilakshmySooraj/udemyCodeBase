@@ -12,9 +12,14 @@ import { NgForm } from '@angular/forms';
 })
 export class AuthPage implements OnInit {
   isLoading = false;
+  isLogin = true;
   constructor(private authservice:AuthService, private route: Router,private LoadingCtrl:LoadingController) { }
 
   ngOnInit() {
+  }
+
+  switch() {
+    this.isLogin = ! this.isLogin;
   }
 
   login() {
@@ -33,6 +38,6 @@ export class AuthPage implements OnInit {
 
 
   onSubmit(form: NgForm){
-    console.log(form);
+    console.log(form.value.email);
   }
 }

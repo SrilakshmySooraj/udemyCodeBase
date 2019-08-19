@@ -2,34 +2,59 @@
   <ion-toolbar>
     <ion-buttons slot="start">
         <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
-    </ion-buttons>
+      </ion-buttons>
     <ion-title>New Offers</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="onCreateForm()">
+      <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid no-padding>
-    <ion-row align-item-start justify-content-end>
-      <ion-col size="4" offset="2">Row 1 Col 1</ion-col>
-      <ion-col size="4">
-        <ion-card>
-          <ion-card-content>
-            <h1>The Column</h1>
-            <p>Row 1 Col 2</p>
-          </ion-card-content>
-        </ion-card>
+  <form [formGroup]="form">
+  <ion-grid padding>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" autocorrect autocomplete formControlName="title"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row align-item-start justify-content-end>
-        <ion-col size="4" offset="2">Row 1 Col 1</ion-col>
-        <ion-col size="4">
-          <ion-card>
-            <ion-card-content>
-              <h1>The Column</h1>
-              <p>Row 1 Col 2</p>
-            </ion-card-content>
-          </ion-card>
+    <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-input type="textArea" formControlName="description"></ion-input>
+          </ion-item>
         </ion-col>
       </ion-row>
+      <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating" >Price</ion-label>
+              <ion-input type="number" formControlName="price"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating" >Available From</ion-label>
+                <ion-datetime min="2019-01-01" max="2019-12-31" formControlName="availableFrom"></ion-datetime>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating" >Available To</ion-label>
+                  <ion-datetime min="2019-01-01" max="2019-12-31" formControlName="availableTo"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
   </ion-grid>
+</form>
 </ion-content>

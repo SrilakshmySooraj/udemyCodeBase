@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Authentication</ion-title>
+    <ion-title>{{isLogin? 'Login' : 'SignUp'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <form #f="ngForm" (ngSubmit)="onSumbit(f)">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3">
@@ -21,8 +21,8 @@
     </ion-row>
     <ion-row>
         <ion-col size-md="6" offset-md="3">
-            <ion-button type="button" fill="clear" expand="block">Switch to Login</ion-button>
-            <ion-button type="submit" color="primary" margin (click)="login()" expand="block">Login</ion-button>
+            <ion-button type="button" fill="clear" expand="block" (click)="switch()">Switch to {{isLogin? 'SignUp' : 'Login'}}</ion-button>
+            <ion-button type="submit" color="primary" margin (click)="login()" expand="block" [disabled]="!f.valid">Login</ion-button>
         </ion-col>
       </ion-row>
   </ion-grid>
