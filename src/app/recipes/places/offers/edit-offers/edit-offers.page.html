@@ -1,37 +1,36 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/places/tabs/offers">
-      </ion-back-button>
-    </ion-buttons>
-    <ion-title>Edit Offer</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button (click)="onEditForm()" [disabled]="!form.valid">
-        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+        <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
+      </ion-buttons>
+    <ion-title>New Offers</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="onUpdateOffer()" [disabled]="!form.valid">
+      <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form [formGroup]="form">
- <ion-grid padding>
-  <ion-row>
-    <ion-col>
-      <ion-item>
-          <ion-label position="floating">Title</ion-label>
-          <ion-input type="text" formControlName="title"></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row>
+  <ion-grid padding>
+    <ion-row>
       <ion-col>
         <ion-item>
-            <ion-label position="floating">Description</ion-label>
-            <ion-input formControlName="description"></ion-input>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" autocorrect autocomplete formControlName="title"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
- </ion-grid>
+    <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
 </form>
 </ion-content>

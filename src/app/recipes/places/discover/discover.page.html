@@ -18,12 +18,12 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title>
-            {{ loadedPlaces[0].title }}
+            {{ loadedPlaces[0]?.title }}
           </ion-card-title>
-         <ion-card-subtitle>{{loadedPlaces[0].price | currency}}</ion-card-subtitle>
+         <ion-card-subtitle>{{loadedPlaces[0]?.price | currency}}</ion-card-subtitle>
         </ion-card-header>
         <ion-img [src]="loadedPlaces[0].imageUrl"></ion-img>
-        <ion-card-content> <p><ion-text color="danger">{{loadedPlaces[0].description}}</ion-text></p> </ion-card-content>
+        <ion-card-content> <p><ion-text color="danger">{{loadedPlaces[0]?.description}}</ion-text></p> </ion-card-content>
         <div text-right padding>
           <ion-button fill="clear" color="primary" [routerLink]="['/', 'places', 'tabs' , 'discover', loadedPlaces[0].id]">More</ion-button>
         </div>
@@ -35,9 +35,9 @@
       <ion-virtual-scroll [items]="listedloadedPlaces" approxItemHeight="30px">
           <ion-item *virtualItem="let items" [routerLink]="['/','places','tabs','discover', items.id]"  detail>
               <ion-thumbnail slot="start">
-                <img [src]="items.imageUrl">
+                <img [src]="items?.imageUrl">
               </ion-thumbnail>
-              <ion-label>{{items.title}}</ion-label>
+              <ion-label>{{items?.title}}</ion-label>
             </ion-item>
       </ion-virtual-scroll>
     </ion-col>

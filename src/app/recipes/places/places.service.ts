@@ -1,30 +1,73 @@
 import { Injectable } from '@angular/core';
 import { Places } from './places.model';
-import { identifierModuleUrl } from '@angular/compiler';
+import { AuthService } from '../auth/auth.service';
+import { BehaviorSubject } from 'rxjs';
+import { take, map, tap, delay } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlacesService {
 
-  private places: Places [] = [
-     // tslint:disable-next-line: max-line-length
-     new Places('P1', 'Manhatten', 'In the heart of New york city', 'https://s19623.pcdn.co/wp-content/uploads/2018/01/new-york-film-locations.jpg', 233.23, new Date('2019-01-01'),  new Date('2019-01-01')),
-     // tslint:disable-next-line: max-line-length
-     new Places('P2', 'Chicago', 'The most populous city in Illinois as well as the third most populous city in the United States', 'https://media.timeout.com/images/105439616/630/472/image.jpg', 2233.23, new Date('2019-01-01'),  new Date('2019-01-01')),
-     // tslint:disable-next-line: max-line-length
-     new Places('P3', 'Connecticut', 'A mid city in the United States', 'https://www.history.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_768/MTU3ODc5MDg2OTY5MDcxMzI3/old-mystic-in-autumn-2.jpg', 133.23, new Date('2019-01-01'),  new Date('2019-01-01'))
-  ];
+  private places = new BehaviorSubject<Places[]>([
+    new Places(
+      'p1',
+      'Manhattan Mansion',
+      'In the heart of New York City.',
+      'https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200',
+      149.99,
+      new Date('2019-01-01'),
+      new Date('2019-12-31'),
+      'abc'
+    ),
+    new Places(
+      'p2',
+      'L Amour Toujours',
+      'A romantic place in Paris!',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Paris_Night.jpg/1024px-Paris_Night.jpg',
+      189.99,
+      new Date('2019-01-01'),
+      new Date('2019-12-31'),
+      'abc'
+    ),
+    new Places(
+      'p3',
+      'The Foggy Palace',
+      'Not your average city trip!',
+      'https://upload.wikimedia.org/wikipedia/commons/0/01/San_Francisco_with_two_bridges_and_the_fog.jpg',
+      99.99,
+      new Date('2019-01-01'),
+      new Date('2019-12-31'),
+      'abc'
+    )
+  ]);
 
   get Places() {
-    return [...this.places];
+    return this.places.asObservable();
   }
   
-  constructor() { }
+  constructor(private authservice: AuthService) { }
   
   retrive(id: string){
-    console.log(id);
-    return {...this.places.find(p => p.id === id)};
+    return this.places.pipe(take(1),map(places => {
+      return {...places.find(p => p.id === id)}
+    }));
   }
 
+  addPlace(title: string, description : string, price:number, DateFrom:Date, DateTo: Date){
+    const newPlace = new Places(Math.random().toString(),title,description,
+    'https://s19623.pcdn.co/wp-content/uploads/2018/01/new-york-film-locations.jpg',
+    price,DateFrom,DateTo,this.authservice.userId);
+    
+    return this.places.pipe(take(1),tap(places => {
+      setTimeout(() => {
+        this.places.next(places.concat(newPlace));
+      },1000);
+    }));
+  }
+
+  updatePlace(title:string,description:string){
+    
+  }
 }
