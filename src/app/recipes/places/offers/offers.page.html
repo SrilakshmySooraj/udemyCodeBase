@@ -13,9 +13,13 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item-sliding *ngFor="let place of loadedOffers" #slidingItem>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <div *ngIf="loadedOffers.length <= 0">
+            <p>No offers found! Please create one first!</p>
+            <ion-button color="primary" routerLink="/places/tabs/offers/new">Offer New Place</ion-button>
+        </div>
+        <ion-list *ngIf="loadedOffers.length > 0" >
+          <ion-item-sliding  *ngFor="let place of loadedOffers" #slidingItem>
             <app-offer-items [place]="place"></app-offer-items>
             <ion-item-options side="end">
               <ion-item-option color="secondary" (click) ="onEdit(place?.id,slidingItem)">

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PlacesService } from '../places.service';
 import { Places } from '../places.model';
-import { MenuController, IonItemSliding } from '@ionic/angular';
+import { MenuController, IonItemSliding, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -17,16 +17,25 @@ export class OffersPage implements OnInit, OnDestroy {
       this.placesSub.unsubscribe();
     }
   }
-  
   loadedOffers: Places[];
   private placesSub : Subscription;
   
-  constructor(private placeService: PlacesService,private menuCtrl:MenuController, private router: Router) { }
+  constructor(private placeService: PlacesService,private menuCtrl:MenuController, private router: Router,private loadingCtrl:LoadingController) { }
 
   ngOnInit() {
      this.placesSub = this.placeService.Places.subscribe(places =>{ 
       this.loadedOffers = places;
     });
+  }
+
+  ionViewWillEnter() {
+    this.loadingCtrl.create({message:'Fetching places ...'}).then(loadingEl => {
+      loadingEl.present();
+      this.placeService.fetchPlaces().subscribe( () => {
+        this.loadingCtrl.dismiss();
+      });
+    })
+   
   }
 
   openMenu() {

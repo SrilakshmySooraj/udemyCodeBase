@@ -4,7 +4,7 @@ import { Places } from '../../places.model';
 import { PlacesService } from '../../places.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-offers',
@@ -22,6 +22,7 @@ export class EditOffersPage implements OnInit,OnDestroy {
     private placesService: PlacesService,
     private navCtrl: NavController,
     private router: Router,
+    private loadingCtrl :LoadingController
   ) {}
 
   ngOnInit() {
@@ -47,11 +48,25 @@ export class EditOffersPage implements OnInit,OnDestroy {
           this.place = places;
         });
     });
-  
   }
 
   onUpdateOffer() {
-    console.log("asdasdas");
+    if( ! this.form.valid) {
+      return ;
+    }
+    this.loadingCtrl.create({
+      message: 'Updating place...'
+    }).then(loadingEl => {
+      loadingEl.present();
+      this.placesService.updatePlace(this.place.id,
+        this.form.value.title,
+        this.form.value.description
+        ).subscribe(() => {
+          this.loadingCtrl.dismiss();
+          this.form.reset();
+          this.router.navigate(['/places/tabs/offers']);
+        })
+    });
   }
 
   ngOnDestroy() {

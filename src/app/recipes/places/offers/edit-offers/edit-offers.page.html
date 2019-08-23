@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
         <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
       </ion-buttons>
-    <ion-title>New Offers</ion-title>
+    <ion-title>Edit Offers</ion-title>
   <ion-buttons slot="primary">
     <ion-button (click)="onUpdateOffer()" [disabled]="!form.valid">
       <ion-icon name="checkmark" slot="icon-only"></ion-icon>
@@ -19,7 +19,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">Title</ion-label>
-          <ion-input type="text" autocorrect autocomplete formControlName="title"></ion-input>
+          <ion-input type="text" autocorrect autocomplete formControlName="title" value={{place?.title}}></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -27,7 +27,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Description</ion-label>
-            <ion-textarea formControlName="description"></ion-textarea>
+            <ion-textarea formControlName="description" value={{place?.description}}></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>
